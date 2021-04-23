@@ -4,20 +4,19 @@ import { Pragma } from "pragmajs"
 
 let messageScript = `
 function respond(key, data) {
-    postMessage(JSON.stringify({
+    postMessage({
         key,
         data
-    }))
+    })
 }
 
 onmessage = async (_data) => {
     let data = _data.data
 
-    data = JSON.parse(data)
     let key = data.key
 
     if (!_data.isTrusted) respond(key, 500)
-    let fn = fns[data.name]
+    let fn = fns.get(data.name)
     if (!fn) respond(key, 404)
 
     let result = await fn(...data.args)
@@ -42,15 +41,13 @@ export class PragmaWorker extends Pragma {
 
     execute(name, ...args) {
         let key = this._executes // unique id
-        this.worker.postMessage(JSON.stringify({ key, name, args }))
+        this.worker.postMessage({ key, name, args })
 
         this._executes += 1
 
         return new Promise((resolve, reject) => {
             this.on('message', data => {
-                console.log('received', data)
                 if (data.key !== key) return 
-                console.log(key, data)
                 resolve(data.data)
                 return listener => listener.selfDestruct() // remove listener
             })
@@ -71,17 +68,17 @@ export class PragmaWorker extends Pragma {
     }
 
     spawnWorker() {
-        let script = "fns = {"
+        let script = "const fns = new Map(Object.entries({"
             for (let [name, fn] of this._blocks) {
                 script += `${name}: ${fn.toString()},`
             }
 
-        script += "};" + messageScript
+        script += "}));" + messageScript
 
         this.worker = createWorker(script)
         this.worker.onmessage = data => { 
             if (!data.isTrusted) return console.error('data not trusted')
-            this.triggerEvent('message', JSON.parse(data.data))
+            this.triggerEvent('message', data.data)
         }
         // this.worker.onerror = jayson => { this.triggerEvent('error', JSON.parse(jayson))}
 

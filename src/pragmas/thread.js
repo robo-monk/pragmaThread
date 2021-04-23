@@ -8,10 +8,9 @@ export class Thread extends Pragma {
         this._maxWorkers = maxWorkers
     }
 
-    run(fn) {
+    run(fn, ...args) {
         let fnWorker = this.fnMap.get(fn)
-        console.log(fnWorker)
-        return fnWorker.execute(fn)
+        return fnWorker.execute(fn, ...args)
     }
 
     getAvalaibleWorker(fn) {
@@ -27,9 +26,13 @@ export class Thread extends Pragma {
         for (let fn of fns) {
             this.createFn(fn)
 
-            this[fn] = () => {
-                return this.run(fn)
+            console.log('creating...', fn.name)
+            let self = this
+            this[fn.name] = function() {
+                return self.run(fn.name, ...arguments)
             }
+
+            // console.log(this[fn.name]())
         }
 
         return this

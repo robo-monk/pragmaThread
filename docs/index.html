@@ -13,13 +13,19 @@
 <body>
 
     <div class='flex-center page-container' pragma #display-wrapper>
-        <h1> Hello, pragmaThread </h1>
-        <p> Yes this works </p>
+        <h1> pragma thread </h1>
 
+        <div id='main-thread' class='button'> Run fibonacci in main thread </div>
+        <br>
+        <div id='threaded' class='button'> Run fibonacci in thread </div>
+        <div id='result'> </div>
+        <div class="stagger-visualizer"></div>
         <div pragma #display></div>
     </div>
 
     <script src="scripts/pragmaThread.umd.js?r={{ random }}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+    <script src="scripts/animation.js?r={{ random }}"></script>
     <script src="pragmaThread_demo.js?r={{ random }}"></script>
 </body>
 

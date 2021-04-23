@@ -5,12 +5,25 @@
 	 background-color: #161616;
 	 color: whitesmoke;
 }
- body h1, body h2, body h3, body h4, body h5, body h6 {
+ body h1, body h2, body h3, body h4, body h5, body h6, body .button {
 	 font-family: 'IBM Plex Mono', monospace;
 }
  body p {
 	 font-family: 'IBM Plex Sans', sans-serif;
 }
+
+.button {
+	background-color: #282828;
+	padding: 5px 10px;
+	border-radius: 2px;
+	cursor: pointer;
+	transition: all .2s ease;
+}
+
+.button:hover {
+	background-color: #525252;
+}
+
  .page-container {
 	 height: 100vh;
 }
@@ -76,3 +89,34 @@
 	}
 }
  
+
+
+body,
+html{
+  position: absolute;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+}
+
+.stagger-visualizer {
+  display: flex;
+  /*flex-wrap: wrap;*/
+  justify-content: center;
+  align-items: center;
+  width: 450px;
+  height: 450px;
+  z-index: -1;
+  opacity: .9;
+}
+
+.stagger-visualizer div {
+  /*position: absolute;*/
+  width: 64px;
+  height: 128px;
+  border: 1px solid whitesmoke;
+  /* background-color: #F6F4F2; */
+}
