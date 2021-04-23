@@ -9,6 +9,50 @@
 ### [ Demo ](https://robo-monk.github.io/pragmaThread)
 
 
+## Usage:
+
+```javascript
+
+// create a new thread
+
+let _thr = _thread() // thread is a pragma
+                .on('execute', fn => {
+                    console.time(fn)
+                })
+                .on('done', fn => {
+                    console.timeEnd(fn)
+                })
+
+// define the functions you want to thread
+
+_thr.define(
+    function fib(i, last=0) {
+      if (i<0) return undefined
+      if (i<=1) return i
+      return fib(i-1) + fib(i-2)
+    },
+
+    function test() {
+        // this keyword lets you reference functions and blocks
+        return this.fib()
+    }
+)
+
+// call it
+_thr.fib(12).then(result => {
+    console.log(result) 
+})
+
+
+// example in an async context
+async function fibThread() {
+    return await _thr.fib(...arguments)    
+}
+
+
+
+
+```
 ## First time:
 
 ```bash

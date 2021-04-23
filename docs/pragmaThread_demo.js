@@ -1,24 +1,11 @@
-pragmaThread.compose() // creates the _page object with all the pragmas defined in the html
-pragmaThread.injectStyle('main')
+let _thread = pragmaThread._thread
 
-console.log(_page.displayWrapper)
-console.log(_page.display)
+console.log(_thread)
 
-_page.display
-    .css("height 250px")
-    .createWire('icon')
-    .on('iconChange', function (v) {
-        if (this._last) this._last.destroy()
-        this._last = _e(pragmaThread.icons[this._icons[v]])
-            .addClass('fade-onload')
-            .css('fill whitesmoke')
-            .appendTo(this)
-    })
-    .run(function () {
-        this._icons = Object.keys(pragmaThread.icons)
-        this.setIconLoop(0, this._icons.length - 1)
-        setInterval(() => {
-            this.icon++
-        }, 420+69);
-    })
-    .setIcon(0)
+let thr = _thread()
+                .define(function test() { return 420 })
+                .run('test').then(resp => {
+                    console.log(resp)
+                })
+                
+console.log(thr)
