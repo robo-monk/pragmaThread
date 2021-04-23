@@ -1,2 +1,2 @@
 *.py linguist-vendored
-.pnpm/* linguist-vendored
+.pnpm/scripts/* linguist-vendored
