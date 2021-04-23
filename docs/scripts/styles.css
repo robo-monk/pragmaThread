@@ -13,15 +13,20 @@
 }
 
 .button {
-	background-color: #282828;
-	padding: 5px 10px;
+	/* background-color: #282828; */
+	padding: 10px 10px;
 	border-radius: 2px;
 	cursor: pointer;
 	transition: all .2s ease;
+	user-select: none;
+	border-bottom: 2px solid #ff4036b6;
 }
 
 .button:hover {
 	background-color: #525252;
+	background-color: #FF4136;
+	border-bottom: 2px solid transparent;
+	color: black;
 }
 
  .page-container {
@@ -32,6 +37,38 @@
 	 align-items: center;
 	 justify-content: center;
 	 flex-direction: column;
+}
+.page-container {
+	padding: 0 30px;
+	/* background-color: #282828a1; */
+
+	backdrop-filter: blur( 4px );
+	-webkit-backdrop-filter: blur( 4px );
+}
+
+.terminal {
+	position: fixed;
+	font-family: 'IBM Plex Mono', monospace;
+	/* background-color: #303030; */
+	top: 5vh;
+	margin: auto;
+	text-align: center;
+	z-index: 1000;
+	color: #FF4136;
+	/* padding: 10px; */
+}
+
+sp {
+	width: 50%;	
+	height: 1px;
+	margin: 15px auto;
+
+	background-color: rgba(245, 245, 245, 0.336);
+}
+pre {
+	background-color: #282828;
+	border-radius: 2px;
+	padding: 5px 25px;
 }
  .fade-onload {
 	 -webkit-animation: fadein 0.5s;
@@ -103,20 +140,21 @@ html{
 }
 
 .stagger-visualizer {
+	position: absolute;
   display: flex;
   /*flex-wrap: wrap;*/
   justify-content: center;
   align-items: center;
-  width: 450px;
-  height: 450px;
+  width: 100vw;
+  height: 100vh;
   z-index: -1;
   opacity: .9;
 }
 
 .stagger-visualizer div {
-  /*position: absolute;*/
+  /* position: absolute; */
   width: 64px;
   height: 128px;
-  border: 1px solid whitesmoke;
+  border: 1px solid #FF4136;
   /* background-color: #F6F4F2; */
 }

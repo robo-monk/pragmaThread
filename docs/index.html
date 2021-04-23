@@ -15,14 +15,43 @@
     <div class='flex-center page-container' pragma #display-wrapper>
         <h1> pragma thread </h1>
 
-        <div id='main-thread' class='button'> Run fibonacci in main thread </div>
         <br>
-        <div id='threaded' class='button'> Run fibonacci in thread </div>
-        <p id='display'></p>
+        <br>
+        <div>
+            <pre> 
+function fib(i, last = 0) {
+    if (i < 0) return undefined
+    if (i <=1) return i
+    return fib(i - 1) + fib(i - 2)
+}
 
-        <div class="stagger-visualizer"></div>
+fib(42)
+            </pre>
+        </div>
+            <div id='main-thread' class='button'> Run fibonacci in main thread </div>
+        <br>
+
+        <br>
+        <br>
+            <pre> 
+
+let thr = _thr().define(
+    function fib(i, last = 0) {
+        if (i < 0) return undefined
+        if (i <=1) return i
+        return fib(i - 1) + fib(i - 2)
+    }
+)
+
+thr.fib(42)
+
+            </pre>
+        <div id='threaded' class='button'> Run threaded fibonacci </div>
+        <div id='display' class='terminal'></div>
+
     </div>
 
+        <div class="stagger-visualizer"></div>
     <script src="scripts/pragmaThread.umd.js?r={{ random }}"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
     <script src="scripts/animation.js?r={{ random }}"></script>
