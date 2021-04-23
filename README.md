@@ -1,6 +1,6 @@
-![npm-size](https://img.shields.io/npm/v/pragmaThread?style=flat-square)
-![npm-size](https://img.shields.io/github/commit-activity/m/robo-monk/pragmaThread?style=flat-square)
-![npm-size](https://img.shields.io/npm/dw/pragmaThread?style=flat-square)
+![npm-size](https://img.shields.io/npm/v/pragma-thread?style=flat-square)
+![npm-size](https://img.shields.io/github/commit-activity/m/robo-monk/pragma-thread?style=flat-square)
+![npm-size](https://img.shields.io/npm/dw/pragma-thread?style=flat-square)
 
 # pragmaThread 
 > made with ❤ ️by robo-monk
