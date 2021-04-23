@@ -25,6 +25,10 @@ let _thr = _thread() // thread is a pragma
 
 // define the functions you want to thread
 
+// this will create a dedicated worker for this function set
+// you can define more function sets (thus multiple dedicated workers) within the same _thread, allthough 
+// i would recommend just to create new thread objects to make it more simple
+
 _thr.define(
     function fib(i, last=0) {
       if (i<0) return undefined
@@ -33,7 +37,8 @@ _thr.define(
     },
 
     function test() {
-        // this keyword lets you reference functions and blocks
+        // this keyword lets you reference functions and blocks, of the current
+        // function set you're defining
         return this.fib()
     }
 )
@@ -49,10 +54,46 @@ async function fibThread() {
     return await _thr.fib(...arguments)    
 }
 
+```
 
 
+## How to write threaded functions
+There are some things you can't thread in javascript, mainly DOM manipulation. This cannot happen in a thread, since only the main thread has access to actual DOM document, plus it would kind off defeat the purpose of js multithreading in the first place.
+
+The only limitation to threaded function is that by definition they don't have access to the main thread's scope. So:
+
+```javascript
+
+let nice = 69
+
+_thr.define(
+    function yeet() {
+        console.log(nice)
+    }
+)
+
+_thr.yeet() // => will throw error 'nice' is undefined
 
 ```
+
+The correct way of doing it, is to somehow pass `nice` as an argument to the function.
+
+```javascript
+let nice = 69
+
+_thr.define(
+    function yeet(nice) {
+        console.log(nice)
+    }
+)
+
+_thr.yeet(nice) // => `69` 
+               // - very nice
+```
+
+> Think that the code that you're writing in a threaded function will run in a magical place, no matter when, where, why, it will just transform the arguments in, in an output 
+
+
 ## First time:
 
 ```bash

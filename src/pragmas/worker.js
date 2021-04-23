@@ -15,10 +15,10 @@ onmessage = async (_data) => {
     let key = data.key
 
     if (!_data.isTrusted) respond(key, 500)
-    let fn = fns[data.name].bind(fns)
+    let fn = fns[data.name]
     if (!fn) respond(key, 404)
 
-    let result = await fn(...data.args)
+    let result = await fn.bind(fns)(...data.args)
     respond(key, result)
 }
 `
@@ -74,6 +74,7 @@ export class PragmaWorker extends Pragma {
 
         script += "};" + messageScript
 
+        this.worker?.kill()
         this.worker = createWorker(script)
         this.worker.onmessage = data => { 
             if (!data.isTrusted) return console.error('data not trusted')
@@ -81,7 +82,11 @@ export class PragmaWorker extends Pragma {
         }
         // this.worker.onerror = jayson => { this.triggerEvent('error', JSON.parse(jayson))}
 
-        return this.workeer
+        return this.worker
+    }
+
+    kill() {
+        this.worker.kill()
     }
 
 }

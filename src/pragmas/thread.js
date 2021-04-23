@@ -1,6 +1,7 @@
 import { Pragma } from 'pragmajs'
 import { _worker } from "./index"
 
+const thisRe = /this.([\w()' "`:=>{}]+)/gm
 export class Thread extends Pragma {
     constructor(maxWorkers=4) {
         super()
@@ -13,9 +14,9 @@ export class Thread extends Pragma {
         return fnWorker.execute(fn, ...args)
     }
 
-    getAvalaibleWorker(fn) {
+    getAvalaibleWorker(...fns) {
         if (this._workers > this._maxWorkers) return console.error('max amount of workers reached')
-        return _worker(fn)
+        return _worker(...fns)
     }
 
     createFn(fn) {
@@ -23,8 +24,10 @@ export class Thread extends Pragma {
     }
 
     define(...fns) {
+        let worker = this.getAvalaibleWorker(...fns)
         for (let fn of fns) {
-            this.createFn(fn)
+            // this.createFn(fn)
+            this.fnMap.set(fn.name, worker)
 
             let self = this
             this[fn.name] = function() {

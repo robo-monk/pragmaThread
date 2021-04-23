@@ -16,7 +16,7 @@ let thr = _thread()
                 .define(fib,
                     function test2() {
                         console.log(this)
-                        console.log('fibonacci', this.fib(1))
+                        console.log('fibonacci', this.fib(20))
                         return 420
                     })
 
@@ -31,7 +31,6 @@ let display = _p().as(_e('#display'))
                         this.html(msg)
                         return this
                     }
-
                 )
 
 _e('#main-thread').listenTo('click', () => {
@@ -59,3 +58,4 @@ _e('#threaded').listenTo('click', () => {
 })
 
 console.log(thr.test2('yeet'))
+console.log('thread is', thr)
