@@ -1,6 +1,6 @@
 manager: yarn
 
-package_npm_name: pragmaThread
+package_npm_name: pragma-thread
 package_name: pragmaThread
 
 test?: no # or yes

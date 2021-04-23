@@ -1,5 +1,5 @@
 {
-    "name": "pragmaThread",
+    "name": "pragma-thread",
     "version": "0.0.1",
     "description": "pragmaThread is awesome",
     "license": "MIT",
@@ -15,7 +15,13 @@
         "dist/"
     ],
     "keywords": [
-        "pragmaThread"
+        "pragmaThread",
+        "pragma-thread",
+        "thread",
+        "worker",
+        "pragma",
+        "pragmajs",
+        "fready"
     ],
     "devDependencies": {
         "@babel/core": "^7.12.3",
