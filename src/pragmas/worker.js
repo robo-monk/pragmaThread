@@ -1,4 +1,3 @@
-import { data } from "jquery"
 import { Pragma } from "pragmajs"
 
 
@@ -16,7 +15,7 @@ onmessage = async (_data) => {
     let key = data.key
 
     if (!_data.isTrusted) respond(key, 500)
-    let fn = fns.get(data.name)
+    let fn = fns[data.name].bind(fns)
     if (!fn) respond(key, 404)
 
     let result = await fn(...data.args)
@@ -68,12 +67,12 @@ export class PragmaWorker extends Pragma {
     }
 
     spawnWorker() {
-        let script = "const fns = new Map(Object.entries({"
+        let script = "const fns = {"
             for (let [name, fn] of this._blocks) {
                 script += `${name}: ${fn.toString()},`
             }
 
-        script += "}));" + messageScript
+        script += "};" + messageScript
 
         this.worker = createWorker(script)
         this.worker.onmessage = data => { 

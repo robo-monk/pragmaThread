@@ -13,7 +13,12 @@ function fib(i, last = 0) {
 }
 
 let thr = _thread()
-                .define(fib)
+                .define(fib,
+                    function test2() {
+                        console.log(this)
+                        console.log('fibonacci', this.fib(1))
+                        return 420
+                    })
 
 
 let display = _p().as(_e('#display'))
@@ -52,3 +57,5 @@ _e('#threaded').listenTo('click', () => {
         })
     }, 50)
 })
+
+console.log(thr.test2('yeet'))

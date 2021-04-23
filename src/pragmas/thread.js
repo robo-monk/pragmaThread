@@ -26,13 +26,11 @@ export class Thread extends Pragma {
         for (let fn of fns) {
             this.createFn(fn)
 
-            console.log('creating...', fn.name)
             let self = this
             this[fn.name] = function() {
                 return self.run(fn.name, ...arguments)
             }
 
-            // console.log(this[fn.name]())
         }
 
         return this
