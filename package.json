@@ -55,7 +55,6 @@
         "url": "https://github.com/robo-monk/pragmaThread/issues"
     },
     "homepage": "https://robo-monk.github.io/pragmaThread/",
-
     "directories": {
         "doc": "docs",
         "test": "test"
