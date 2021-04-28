@@ -8,6 +8,12 @@
 
 ### [ Demo ](https://robo-monk.github.io/pragmaThread)
 
+Pragma Thread makes working in multiple threads in JavaScript simple and pain in the ass free. You don't need other files to initalize `Workers` from, you can have multiple threads spawned from the same file. It's a tiny plugin for [`pragmajs`](https://github.com/robo-monk/pragmajs)
+
+You first `define` the functionalities you want to thread, and then at some point in your code you call them, using `Promises` or/and `async/await`. 
+
+It's actually that simple.
+
 
 ## Usage:
 
